@@ -1,16 +1,23 @@
 import requests
 import json
 import random
+import locations
+import pokedata
+
+pkm_count = int(input())
+gsid = input()
+location = random.choice(locations.locations)
+
 
 g = requests.Session()
-encounters = [{'species': random.randint(1, 649), 'move': 75, 'form': '0', 'gender': 'GENDERLESS', 'animation': 'LOOK_AROUND'} for i in range(random.randint(1, 10))]
+encounters = [{'species': pokedata.pkms[random.choice(location)['name']]['id'], 'move': 75, 'form': '0', 'gender': 'GENDERLESS', 'animation': 'LOOK_AROUND'} for i in range(pkm_count)]
 print(g.post('http://127.0.0.1/dashboard/login', data={
-    'gsid': input()}))
+    'gsid': gsid}))
 print(g.post('http://127.0.0.1/dashboard/profile', data=json.dumps({'encounters': encounters,
                                                                     'items': [],
                                                                     'avenueVisitors': [],
                                                                     'cgearSkin': 'none',
                                                                     'dexSkin': 'none',
                                                                     'musical': 'none',
-                                                                    'gainedLevels': 1})))
+                                                                    'gainedLevels': 0})))
 g.close()
