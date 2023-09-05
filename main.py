@@ -18,10 +18,9 @@ class MenuW(QMainWindow, menu.Ui_MainWindow):
         # self.checkBox_2.clicked.connect(self.togglepoints)
         self.checkBox_2.setEnabled(False)
         self.pushButton_3.clicked.connect(self.random_pkm_amount)
+        self.pushButton_4.clicked.connect(self.random_item_amount)
         self.pushButton_2.clicked.connect(self.roll)
         self.pushButton.clicked.connect(self.save)
-
-        self.spinBox_2.setEnabled(False)
 
     def togglepoints(self):
         self.label_6.setEnabled(not self.label_6.isEnabled())
@@ -29,6 +28,9 @@ class MenuW(QMainWindow, menu.Ui_MainWindow):
 
     def random_pkm_amount(self):
         self.spinBox.setValue(random.randint(1, 10))
+
+    def random_item_amount(self):
+        self.spinBox_2.setValue(random.randint(1, 12))
 
     def roll(self):
         self.locationsstr = []
@@ -39,14 +41,19 @@ class MenuW(QMainWindow, menu.Ui_MainWindow):
             if self.verticalLayout_2.itemAt(area).widget().isChecked():
                 self.locationsstr.append(self.verticalLayout_2.itemAt(area).widget().text())
         self.pkmsavailable = []
+        self.itemsavailable = []
         if self.locationsstr:
             for loc in self.locationsstr:
-                self.pkmsavailable += locations.locations[loc]
+                self.pkmsavailable += locations.locations[loc]['pkms']
+                self.itemsavailable += locations.locations[loc]['items']
         else:
-            self.pkmsavailable += locations.locations[random.choice(['Pleasant Forest', 'Windswept Sky',
+            randloc = random.choice(['Pleasant Forest', 'Windswept Sky',
                                                                      'Sparkling Sea', 'Spooky Manor', 'Rugged Mountain',
-                                                                     'Icy Cave', 'Dream Park', 'Cafe Forest'])]
+                                                                     'Icy Cave', 'Dream Park', 'Cafe Forest'])
+            self.pkmsavailable += locations.locations[randloc]['pkms']
+            self.itemsavailable += locations.locations[randloc]['items']
         self.pkm_count = self.spinBox.value()
+        self.item_count = self.spinBox_2.value()
 
         self.encounters = []
         self.ver = 'BW' if self.comboBox.currentText() == 'Black/White' else 'B2W2'
@@ -70,12 +77,23 @@ class MenuW(QMainWindow, menu.Ui_MainWindow):
                 {'species': pkm_id, 'move': move_id, 'form': form, 'gender': pkm_d['gender'], 'animation': animation})
             self.label_9.setText(f'{self.label_9.text()}{pkm["name"]}: {move}, ')
 
+        self.items = []
+        for i in range(self.item_count):
+            item = random.choice(self.itemsavailable)
+            item_id = pokedata.items[item['item']]
+            for o in self.items:
+                if item_id == o['id']:
+                    o['quantity'] += 1
+                else:
+                    self.items.append({'id': item_id, 'quantity': 1})
+            self.label_9.setText(f'{self.label_9.text()}{item["item"]}, ')
+
     def save(self):
         g = requests.Session()
         print(g.post('http://127.0.0.1/dashboard/login', data={
             'gsid': self.lineEdit.text()}))
         print(g.post('http://127.0.0.1/dashboard/profile', data=json.dumps({'encounters': self.encounters,
-                                                                            'items': [],
+                                                                            'items': self.items,
                                                                             'avenueVisitors': [],
                                                                             'cgearSkin': 'none',
                                                                             'dexSkin': 'none',
