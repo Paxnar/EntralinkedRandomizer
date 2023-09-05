@@ -14,7 +14,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(796, 711)
+        MainWindow.resize(796, 738)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("ballepok.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -55,11 +58,17 @@ class Ui_MainWindow(object):
         self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
         self.verticalLayout.addWidget(self.label_3)
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.spinBox = QtWidgets.QSpinBox(self.centralwidget)
         self.spinBox.setMaximum(10)
         self.spinBox.setProperty("value", 6)
         self.spinBox.setObjectName("spinBox")
-        self.verticalLayout.addWidget(self.spinBox)
+        self.horizontalLayout_2.addWidget(self.spinBox)
+        self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.horizontalLayout_2.addWidget(self.pushButton_3)
+        self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(13)
@@ -160,7 +169,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Entralinked Randomizer"))
         self.label.setText(_translate("MainWindow", "Entralinked Randomizer"))
         self.label_2.setText(_translate("MainWindow", "Select Game"))
         self.comboBox.setItemText(0, _translate("MainWindow", "Black/White"))
@@ -168,6 +177,7 @@ class Ui_MainWindow(object):
         self.label_8.setText(_translate("MainWindow", "Game Sync ID"))
         self.lineEdit.setText(_translate("MainWindow", "XXXXXXXXXX"))
         self.label_3.setText(_translate("MainWindow", "How many Pokemon to generate"))
+        self.pushButton_3.setText(_translate("MainWindow", "Random"))
         self.label_4.setText(_translate("MainWindow", "How many items to generate"))
         self.label_5.setText(_translate("MainWindow", "Use Points?"))
         self.label_6.setText(_translate("MainWindow", "Amount of Points"))

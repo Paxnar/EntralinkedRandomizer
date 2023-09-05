@@ -7,11 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>796</width>
-    <height>711</height>
+    <height>738</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Entralinked Randomizer</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>ballepok.png</normaloff>ballepok.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -97,14 +101,25 @@
      </widget>
     </item>
     <item>
-     <widget class="QSpinBox" name="spinBox">
-      <property name="maximum">
-       <number>10</number>
-      </property>
-      <property name="value">
-       <number>6</number>
-      </property>
-     </widget>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QSpinBox" name="spinBox">
+        <property name="maximum">
+         <number>10</number>
+        </property>
+        <property name="value">
+         <number>6</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="text">
+         <string>Random</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
      <widget class="QLabel" name="label_4">
