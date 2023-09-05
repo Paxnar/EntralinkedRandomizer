@@ -36,3 +36,5 @@ Click Roll to see what results you get.\
 Observe the results.\
 Click Reroll if you're not satisfied, or click Save if you are.\
 You can now either check you Entralinked dashboard to check if everything worked or wake up your Pokemon.
+![image](https://github.com/Paxnar/EntralinkedRandomizer/assets/67262211/ea2b15fc-9321-498c-8bd9-549282423bd5)
+
