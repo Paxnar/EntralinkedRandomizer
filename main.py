@@ -81,14 +81,16 @@ class MenuW(QMainWindow, menu.Ui_MainWindow):
         for i in range(self.item_count):
             item = random.choice(self.itemsavailable)
             item_id = pokedata.items[item['item']]
-            for o in self.items:
-                if item_id == o['id']:
-                    o['quantity'] += 1
-                else:
-                    self.items.append({'id': item_id, 'quantity': 1})
+            item_dict = {'id': item_id, 'quantity': 1}
+            if item_dict in self.items:
+                self.items[self.items.index(item_dict)]['quantity'] += 1
+            else:
+                self.items.append(item_dict)
             self.label_9.setText(f'{self.label_9.text()}{item["item"]}, ')
 
     def save(self):
+        print(self.items)
+        print(self.encounters)
         g = requests.Session()
         print(g.post('http://127.0.0.1/dashboard/login', data={
             'gsid': self.lineEdit.text()}))
