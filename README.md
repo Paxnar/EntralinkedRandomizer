@@ -26,18 +26,18 @@ pyinstaller --onefile --noconsole main.py
 
 ## Usage
 
-Run Entralinked.\
-Ensure you tucked in a Pokemon.\
-Run Entralinked Randomizer.\
-Select the game version you are playing (some encounters only appear when you're using a certain version of the games).\
-Input your Game Sync ID.\
-Select the number of pokemon you want to generate or click Random for a random amount.\
-Select the number of items you want to generate or click Random for a random amount.\
-Some pokemon can only appear if you have a certain amount of points, if you want to use imaginary points, check the box that says Use Points? and input the amount of points you have. Not checking the box will ignore the points requirement for those Pokemon.\
-Select the [areas](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Dream_World#Areas) where you want to randomize Pokemon from or select none for a random location.\
-Click Roll to see what results you get.\
-Observe the results.\
-Click Reroll if you're not satisfied, or click Save if you are.\
-You can now either check you Entralinked dashboard to check if everything worked or wake up your Pokemon.
-![image](https://github.com/Paxnar/EntralinkedRandomizer/assets/67262211/ea2b15fc-9321-498c-8bd9-549282423bd5)
-
+1. Run Entralinked.
+1. Ensure you tucked in a Pokemon.
+1. Run Entralinked Randomizer.
+1. Select the game version you are playing (some encounters only appear when you're using a certain version of the games).
+1. Input your Game Sync ID.
+1. Select the number of pokemon you want to generate or click Random for a random amount.
+1. Select the number of items you want to generate or click Random for a random amount.
+1. Some pokemon and areas can only appear if you have a certain amount of points, if you want to use imaginary points, check the box that says Use Points? and input the amount of points you have. Not checking the box will ignore the points requirement for Pokemon and areas.
+1. Areas that house a certain type have a higher chance of appearing if your sleeping Pokemon's type matches that type. If you want to use this feature, check the Use Pokemon's type? box and click Get.
+1. Select the [areas](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Dream_World#Areas) where you want to randomize Pokemon from or select none for a random location.
+1. Click Roll to see what results you get.
+1. Observe the results.
+1. Click Reroll if you're not satisfied, or click Save if you are.
+1. You can now either check you Entralinked dashboard to check if everything worked or wake up your Pokemon.
+![image](https://github.com/Paxnar/EntralinkedRandomizer/assets/67262211/d7daf3c8-3404-4702-b1a9-66497047e7f5)
