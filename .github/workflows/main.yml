@@ -22,3 +22,8 @@ jobs:
       with:
         name: my-exe
         path: ./ # or path/to/artifact
+
+    - uses: actions/download-artifact@v2.1.1
+      with:
+        name: my-exe
+        path: ./ # or path/to/artifact
