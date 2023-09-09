@@ -676,7 +676,7 @@ moves = {'Pound': 1, 'Karate Chop': 2, 'Double Slap': 3, 'Comet Punch': 4, 'Mega
          'Slash': 163, 'Substitute': 164, 'Struggle': 165, 'Sketch': 166, 'Triple Kick': 167, 'Thief': 168,
          'Spider Web': 169, 'Mind Reader': 170, 'Nightmare': 171, 'Flame Wheel': 172, 'Snore': 173, 'Curse': 174,
          'Flail': 175, 'Conversion 2': 176, 'Aeroblast': 177, 'Cotton Spore': 178, 'Reversal': 179, 'Spite': 180,
-         'Powder Snow': 181, 'Protect': 182, 'Mach Punch': 183, 'Scary Face': 184, 'Feint Attack': 185,
+         'Powder Snow': 181, 'Protect': 182, 'Mach Punch': 183, 'Scary Face': 184, 'Faint Attack': 185,
          'Sweet Kiss': 186, 'Belly Drum': 187, 'Sludge Bomb': 188, 'Mud-Slap': 189, 'Octazooka': 190, 'Spikes': 191,
          'Zap Cannon': 192, 'Foresight': 193, 'Destiny Bond': 194, 'Perish Song': 195, 'Icy Wind': 196, 'Detect': 197,
          'Bone Rush': 198, 'Lock-On': 199, 'Outrage': 200, 'Sandstorm': 201, 'Giga Drain': 202, 'Endure': 203,
