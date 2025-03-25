@@ -15,123 +15,147 @@ class MenuW(QMainWindow, menu.Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.checkBox_2.clicked.connect(self.togglepoints)
-        self.checkBox_9.clicked.connect(self.toggletype)
-        self.pushButton_5.clicked.connect(self.gettypes)
-        self.pushButton_3.clicked.connect(self.random_pkm_amount)
-        self.pushButton_4.clicked.connect(self.random_item_amount)
-        self.pushButton_2.clicked.connect(self.roll)
-        self.pushButton.clicked.connect(self.save)
+        self.points_checkbox.clicked.connect(self.togglepoints)
+        self.type_checkbox.clicked.connect(self.toggletypes)
+        self.get_button.clicked.connect(self.get)
+        self.pokegen_button.clicked.connect(self.random_pkm_amount)
+        self.itemgen_button.clicked.connect(self.random_item_amount)
+        self.roll_button.clicked.connect(self.roll)
+        self.save_button.clicked.connect(self.save)
+        self.IP = '127.0.0.1'
         self.types = []
+        self.types_enabled = False
+        self.ver = 'BW'
+        self.level = 1
+
+        self.gamesyncid_label_style = self.gamesyncid_label.styleSheet()
+        self.get_button_style = self.get_button.styleSheet()
+        self.points_label_style = self.points_label.styleSheet()
+        self.points_checkbox_style = self.points_checkbox.styleSheet()
+        self.points_spinbox_style = self.points_spinbox.styleSheet()
 
     def togglepoints(self):
-        self.label_6.setEnabled(not self.label_6.isEnabled())
-        self.spinBox_3.setEnabled(not self.spinBox_3.isEnabled())
+        self.points_label.setEnabled(not self.points_label.isEnabled())
+        self.points_spinbox.setEnabled(not self.points_spinbox.isEnabled())
 
-    def toggletype(self):
-        self.pushButton_5.setEnabled(not self.pushButton_5.isEnabled())
+    def toggletypes(self):
+        self.types_enabled = not self.types_enabled
+        self.types_label.setEnabled(self.types_enabled)
 
-    def gettypes(self):
+    def get(self):
+        self.gamesyncid_label.setStyleSheet(self.gamesyncid_label_style)
         s = requests.Session()
-        print(s.post('http://127.0.0.1/dashboard/login', data={
-            'gsid': self.lineEdit.text()}))
-        ge = s.get('http://127.0.0.1/dashboard/profile').json()
+        login_request = s.post(f'http://{self.IP}/dashboard/login', data={
+            'gsid': self.gamesyncid_lineedit.text()})
+        if 'error' in login_request.json() and login_request.json()['error']:
+            self.gamesyncid_label.setStyleSheet('QLabel {color: red;}')
+            return
+        request = s.get(f'http://{self.IP}/dashboard/profile').json()
         s.close()
-        if 'dreamerInfo' in ge:
-            print(pokedata.types[ge['dreamerInfo']['species']])
-            self.types = pokedata.types[ge['dreamerInfo']['species']]
+        if 'dreamerInfo' in request:
+            self.types = pokedata.types[request['dreamerInfo']['species']]
+            self.types_label.setText(', '.join(self.types if self.types[1] != '' else [self.types[0]]))
+            self.level = request['dreamerInfo']['level']
+        if 'gameVersion' in request:
+            self.game_comboBox.setCurrentIndex(1 if "2" in request['gameVersion'] else 0)
+            self.ver = 'B2W2' if "2" in request['gameVersion'] else 'BW'
 
     def random_pkm_amount(self):
-        self.spinBox.setValue(random.randint(1, 10))
+        self.pokegen_spinbox.setValue(random.randint(1, 10))
 
     def random_item_amount(self):
-        self.spinBox_2.setValue(random.randint(1, 12))
+        self.itemgen_spinbox.setValue(random.randint(1, 12))
 
     def roll(self):
-        self.locationsstr = []
-        self.locationsweight = []
-        self.pushButton_2.setText('Reroll')
-        self.pushButton.setEnabled(True)
-        self.label_9.clear()
-        self.ver = 'BW' if self.comboBox.currentText() == 'Black/White' else 'B2W2'
-        for area in range(8):
-            if self.verticalLayout_2.itemAt(area).widget().isChecked():
-                loc = locations.locations[self.verticalLayout_2.itemAt(area).widget().text()]
-                self.locationsstr.append(loc)
-                if self.types:
-                    self.locationsweight.append(1.25 if (self.types[0] in loc['types']) or
-                                                        (self.types[1] in loc['types']) else 1)
-        self.pkmsavailable = []
-        self.itemsavailable = []
-        if self.locationsstr:
-            ranloc = random.choices(self.locationsstr, weights=self.locationsweight if self.types else None)[0]
-            self.pkmsavailable = ranloc['pkms']
-            self.itemsavailable = ranloc['items']
-        else:
-            for location in locations.locations:
-                self.locationsstr.append(locations.locations[location])
-                if self.types:
-                    self.locationsweight.append(1.25 if (self.types[0] in locations.locations[location]['types']) or
-                                                        (self.types[1] in locations.locations[location]['types']) else 1
-                                                )
-            ranloc = random.choices(self.locationsstr, weights=self.locationsweight if self.types else None)[0]
+        self.get_button.setStyleSheet(self.get_button_style)
+        self.points_label.setStyleSheet(self.points_label_style)
+        self.points_checkbox.setStyleSheet(self.points_checkbox_style)
+        self.points_spinbox.setStyleSheet(self.points_spinbox_style)
+        if not self.types:
+            self.get_button.setStyleSheet('QPushButton {color: red;}')
+            return
+        self.roll_button.setText('Reroll')
+        self.save_button.setEnabled(True)
+        self.output_label.clear()
 
-            while ('Default' != ranloc['points'][self.ver] and self.spinBox_3.value() < ranloc['points'][self.ver])\
-                    if self.spinBox_3.isEnabled() else False:
-                ranloc = random.choices(self.locationsstr, weights=self.locationsweight if self.types else None)[0]
-            self.pkmsavailable = ranloc['pkms']
-            self.itemsavailable = ranloc['items']
-        self.pkm_count = self.spinBox.value()
-        self.item_count = self.spinBox_2.value()
+        areas = [self.areas_layout.itemAt(a).widget().text() for a in range(8)
+                 if self.areas_layout.itemAt(a).widget().isChecked()]
+        if not areas:
+            areas = list(locations.locations.keys())
+        if self.points_checkbox.isChecked():
+            areas = [i for i in areas if locations.locations[i]['points'][self.ver] == 'Default' or
+                     self.points_spinbox.value() >= locations.locations[i]['points'][self.ver]]
+        if not areas:
+            self.points_label.setStyleSheet('QLabel {color: red;}')
+            self.points_checkbox.setStyleSheet('QCheckBox {color: red;}')
+            self.points_spinbox.setStyleSheet('QSpinBox {color: red;}')
+            return
+        areas_weight = [
+            1 + self.level / 100 if self.types_enabled and (self.types[0] in locations.locations[i]['types'] or
+                                                            self.types[1] in locations.locations[i]['types'])
+            else 1 for i in areas]
+        random_location = random.choices(areas, weights=areas_weight)[0]
+        possible_pokemon = locations.locations[random_location]['pkms']
+        possible_items = locations.locations[random_location]['items']
+
+        pokemon_count = self.pokegen_spinbox.value()
+        item_count = self.itemgen_spinbox.value()
 
         self.encounters = []
-        for i in range(self.pkm_count):
-            pkm = random.choice(self.pkmsavailable)
-            while (pkm['ver'] != self.ver and pkm['ver'] != 'none') or \
-                    (('Default' != pkm['points'] and self.spinBox_3.value() < pkm['points'])
-                     if self.spinBox_3.isEnabled() else False):
-                pkm = random.choice(self.pkmsavailable)
-            pkm_d = pokedata.pkms[pkm['name']]
-            pkm_id = pkm_d['id']
-            move = random.choice(pkm['move'])
-            move_id = pokedata.moves[move]
-            form = random.choice(pkm_d['forms']) if pkm['name'] \
-                                                    not in ['Deoxys', 'Rotom', 'Giratina', 'Shaymin', 'Arceus',
-                                                            'Tornadus', 'Thundurus', 'Landorus', 'Kyurem', 'Keldeo',
-                                                            'Meloetta', 'Genesect'] else 0
-            animation = random.choice(["SPIN_RIGHT", "SPIN_LEFT"]) if pkm_id in [597, 11, 14, 327] else \
+        for i in range(pokemon_count):
+            random_pokemon = random.choice(possible_pokemon)
+            while not ((random_pokemon['ver'] == self.ver or random_pokemon['ver'] == 'none') and
+                       ((random_pokemon['points'] == 'Default'
+                         or self.points_spinbox.value() >= random_pokemon['points'])
+                       if self.points_checkbox.isChecked() else True)):
+                random_pokemon = random.choice(possible_pokemon)
+            pokemon_dictionary = pokedata.pkms[random_pokemon['name']]
+            pokemon_id = pokemon_dictionary['id']
+            pokemon_move = random.choice(random_pokemon['move'])
+            pokemon_move_id = pokedata.moves[pokemon_move]
+            form = random.choice(pokemon_dictionary['forms']) if random_pokemon['name'] \
+                                                                 not in ['Deoxys', 'Rotom', 'Giratina', 'Shaymin',
+                                                                         'Arceus',
+                                                                         'Tornadus', 'Thundurus', 'Landorus',
+                                                                         'Kyurem', 'Keldeo',
+                                                                         'Meloetta', 'Genesect'] else 0
+            animation = random.choice(["SPIN_RIGHT", "SPIN_LEFT"]) if pokemon_id in [11, 14, 204, 266, 268, 327,
+                                                                                     412,
+                                                                                     597] else \
                 random.choice(["LOOK_AROUND", "WALK_AROUND", "WALK_LOOK_AROUND", "WALK_VERTICALLY",
                                "WALK_HORIZONTALLY", "WALK_LOOK_HORIZONTALLY", "SPIN_RIGHT", "SPIN_LEFT"])
             self.encounters.append(
-                {'species': pkm_id, 'move': move_id, 'form': form, 'gender': pkm_d['gender'], 'animation': animation})
-            self.label_9.setText(f'{self.label_9.text()}{pkm["name"]}: {move}, ')
+                {'species': pokemon_id, 'move': pokemon_move_id, 'form': form,
+                 'gender': pokemon_dictionary['gender'],
+                 'animation': animation})
+            self.output_label.setText(f'{self.output_label.text()}{random_pokemon["name"]}: {pokemon_move}, ')
         if self.encounters:
-            self.label_9.setText(f'{self.label_9.text()[:-2]}\n\n')
+            self.output_label.setText(f'{self.output_label.text()[:-2]}\n\n')
 
         self.items = []
-        for i in range(self.item_count):
-            item = random.choice(self.itemsavailable)
+        for i in range(item_count):
+            item = random.choice(possible_items)
             item_id = pokedata.items[item['item']]
             item_dict = {'id': item_id, 'quantity': 1}
             if item_dict in self.items:
                 self.items[self.items.index(item_dict)]['quantity'] += 1
             else:
                 self.items.append(item_dict)
-            self.label_9.setText(f'{self.label_9.text()}{item["item"]}, ')
+            self.output_label.setText(f'{self.output_label.text()}{item["item"]}, ')
         if self.items:
-            self.label_9.setText(self.label_9.text()[:-2])
+            self.output_label.setText(self.output_label.text()[:-2])
 
     def save(self):
         g = requests.Session()
-        print(g.post('http://127.0.0.1/dashboard/login', data={
-            'gsid': self.lineEdit.text()}))
-        print(g.post('http://127.0.0.1/dashboard/profile', data=json.dumps({'encounters': self.encounters,
-                                                                            'items': self.items,
-                                                                            'avenueVisitors': [],
-                                                                            'cgearSkin': 'none',
-                                                                            'dexSkin': 'none',
-                                                                            'musical': 'none',
-                                                                            'gainedLevels': 0})))
+        g.post(f'http://{self.IP}/dashboard/login', data={
+            'gsid': self.gamesyncid_lineedit.text()})
+        g.post(f'http://{self.IP}/dashboard/profile', data=json.dumps({'encounters': self.encounters,
+                                                                       'items': self.items,
+                                                                       'avenueVisitors': [],
+                                                                       'cgearSkin': 'none',
+                                                                       'dexSkin': 'none',
+                                                                       'musical': 'none',
+                                                                       'gainedLevels': 0}))
         g.close()
 
 

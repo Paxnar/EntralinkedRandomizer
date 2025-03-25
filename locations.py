@@ -45,3 +45,8 @@ locations = {'Pleasant Forest': PleasantForest, 'Windswept Sky': WindsweptSky, '
 # d = CafeForest
 # d['items'] = place
 # print(d)
+# for i in locations:
+#     area = locations[i]
+#     pkms = [o['name'] for o in area['pkms']]
+#     print(i, pkms)
+

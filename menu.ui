@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>796</width>
-    <height>765</height>
+    <height>800</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="title_label">
       <property name="font">
        <font>
         <pointsize>16</pointsize>
@@ -35,14 +35,14 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="game_label">
       <property name="font">
        <font>
         <pointsize>13</pointsize>
        </font>
       </property>
       <property name="text">
-       <string>Select Game</string>
+       <string>Game</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -50,7 +50,13 @@
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="comboBox">
+     <widget class="QComboBox" name="game_comboBox">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
       <item>
        <property name="text">
         <string>Black/White</string>
@@ -64,7 +70,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_8">
+     <widget class="QLabel" name="gamesyncid_label">
       <property name="font">
        <font>
         <pointsize>13</pointsize>
@@ -79,14 +85,21 @@
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="gamesyncid_lineedit">
       <property name="text">
        <string>XXXXXXXXXX</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label_3">
+     <widget class="QPushButton" name="get_button">
+      <property name="text">
+       <string>Get</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="pokegen_label">
       <property name="font">
        <font>
         <pointsize>13</pointsize>
@@ -103,7 +116,7 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QSpinBox" name="spinBox">
+       <widget class="QSpinBox" name="pokegen_spinbox">
         <property name="maximum">
          <number>10</number>
         </property>
@@ -113,7 +126,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="pokegen_button">
         <property name="text">
          <string>Random</string>
         </property>
@@ -122,7 +135,7 @@
      </layout>
     </item>
     <item>
-     <widget class="QLabel" name="label_4">
+     <widget class="QLabel" name="itemge_label">
       <property name="font">
        <font>
         <pointsize>13</pointsize>
@@ -139,14 +152,14 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
-       <widget class="QSpinBox" name="spinBox_2">
+       <widget class="QSpinBox" name="itemgen_spinbox">
         <property name="maximum">
          <number>12</number>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_4">
+       <widget class="QPushButton" name="itemgen_button">
         <property name="text">
          <string>Random</string>
         </property>
@@ -157,16 +170,16 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QCheckBox" name="checkBox_2">
+       <widget class="QCheckBox" name="points_checkbox">
         <property name="text">
          <string>Use Points?</string>
         </property>
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <layout class="QHBoxLayout" name="points_layout">
         <item>
-         <widget class="QLabel" name="label_6">
+         <widget class="QLabel" name="points_label">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -176,7 +189,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="spinBox_3">
+         <widget class="QSpinBox" name="points_spinbox">
           <property name="enabled">
            <bool>false</bool>
           </property>
@@ -190,9 +203,9 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <layout class="QHBoxLayout" name="type_layout">
       <item>
-       <widget class="QCheckBox" name="checkBox_9">
+       <widget class="QCheckBox" name="type_checkbox">
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
@@ -202,19 +215,19 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_5">
+       <widget class="QLabel" name="types_label">
         <property name="enabled">
          <bool>false</bool>
         </property>
         <property name="text">
-         <string>Get</string>
+         <string/>
         </property>
        </widget>
       </item>
      </layout>
     </item>
     <item>
-     <widget class="QLabel" name="label_7">
+     <widget class="QLabel" name="areas_label">
       <property name="font">
        <font>
         <pointsize>13</pointsize>
@@ -229,7 +242,7 @@
      </widget>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <layout class="QVBoxLayout" name="areas_layout">
       <item>
        <widget class="QCheckBox" name="checkBox">
         <property name="text">
@@ -295,16 +308,16 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_9">
+     <layout class="QHBoxLayout" name="rollsave_layout">
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="roll_button">
         <property name="text">
          <string>Roll</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="save_button">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -316,7 +329,7 @@
      </layout>
     </item>
     <item>
-     <widget class="QLabel" name="label_9">
+     <widget class="QLabel" name="output_label">
       <property name="font">
        <font>
         <pointsize>10</pointsize>
