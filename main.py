@@ -112,16 +112,12 @@ class MenuW(QMainWindow, menu.Ui_MainWindow):
             pokemon_dictionary = pokedata.pkms[random_pokemon['name']]
             pokemon_id = pokemon_dictionary['id']
             pokemon_move = random.choice(random_pokemon['move'])
+            name = random_pokemon['name']
             pokemon_move_id = pokedata.moves[pokemon_move]
-            form = random.choice(pokemon_dictionary['forms']) if random_pokemon['name'] \
-                                                                 not in ['Deoxys', 'Rotom', 'Giratina', 'Shaymin',
-                                                                         'Arceus',
-                                                                         'Tornadus', 'Thundurus', 'Landorus',
-                                                                         'Kyurem', 'Keldeo',
-                                                                         'Meloetta', 'Genesect'] else 0
-            animation = random.choice(["SPIN_RIGHT", "SPIN_LEFT"]) if pokemon_id in [11, 14, 204, 266, 268, 327,
-                                                                                     412,
-                                                                                     597] else \
+            form = random_pokemon['form'] if 'form' in random_pokemon else 0
+            animation = random.choice(["SPIN_RIGHT", "SPIN_LEFT"]) if name in ['Metapod', 'Kakuna', 'Pineco',
+                                                                                     'Silcoon', 'Cascoon', 'Spinda',
+                                                                                     'Burmy', 'Ferroseed'] else \
                 random.choice(["LOOK_AROUND", "WALK_AROUND", "WALK_LOOK_AROUND", "WALK_VERTICALLY",
                                "WALK_HORIZONTALLY", "WALK_LOOK_HORIZONTALLY", "SPIN_RIGHT", "SPIN_LEFT"])
             self.encounters.append(
