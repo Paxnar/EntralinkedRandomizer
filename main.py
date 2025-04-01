@@ -42,6 +42,11 @@ class MenuW(QMainWindow, menu.Ui_MainWindow):
         self.types_enabled = not self.types_enabled
         self.types_label.setEnabled(self.types_enabled)
 
+    def handleformtype(self, species: int, form: int) -> list:
+        if species not in pokedata.formtypes:
+            return pokedata.types[species]
+        return pokedata.formtypes[species][form]
+
     def get(self):
         self.gamesyncid_label.setStyleSheet(self.gamesyncid_label_style)
         s = requests.Session()
@@ -53,7 +58,8 @@ class MenuW(QMainWindow, menu.Ui_MainWindow):
         request = s.get(f'http://{self.IP}/dashboard/profile').json()
         s.close()
         if 'dreamerInfo' in request:
-            self.types = pokedata.types[request['dreamerInfo']['species']]
+            self.types = self.handleformtype(request['dreamerInfo']['species'],
+                                             request['dreamerInfo']['form'] if 'form' in request['dreamerInfo'] else 0)
             self.types_label.setText(', '.join(self.types if self.types[1] != '' else [self.types[0]]))
             self.level = request['dreamerInfo']['level']
         if 'gameVersion' in request:

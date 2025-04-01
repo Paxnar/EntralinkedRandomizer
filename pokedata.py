@@ -1016,6 +1016,14 @@ types = {1: ['Grass', 'Poison'], 2: ['Grass', 'Poison'], 3: ['Grass', 'Poison'],
          645: ['Ground', 'Flying'], 646: ['Dragon', 'Ice'], 647: ['Water', 'Fighting'], 648: ['Normal', 'Psychic'],
          649: ['Bug', 'Steel']}
 
+formtypes = {413: [['Bug', 'Grass'], ['Bug', 'Ground'], ['Bug', 'Steel']],
+             479: [['Electric', 'Ghost'], ['Electric', 'Fire'], ['Electric', 'Water'],
+                   ['Electric', 'Ice'], ['Electric', 'Flying'], ['Electric', 'Grass']],
+             492: [['Grass'], ['Grass', 'Flying']],
+             493: [["Normal"], ["Fighting"], ["Flying"], ["Poison"], ["Ground"], ["Rock"], ["Bug"], ["Ghost"],
+                   ["Steel"], ["Fire"], ["Water"], ["Grass"], ["Electric"], ["Psychic"], ["Ice"], ["Dragon"], ["Dark"]],
+             648: [['Normal', 'Psychic'], ['Normal', 'Fighting']]}
+
 # d = {}
 # for i in types.split('\n')[1:]:
 #     if int(i.split(',')[0]) not in d:
