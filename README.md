@@ -29,12 +29,12 @@ pyinstaller --onefile --noconsole main.py
 1. Run Entralinked.
 1. Ensure you tucked in a Pokemon.
 1. Run Entralinked Randomizer.
-1. Select the game version you are playing (some encounters only appear when you're using a certain version of the games).
 1. Input your Game Sync ID.
-1. Select the number of pokemon you want to generate or click Random for a random amount.
-1. Select the number of items you want to generate or click Random for a random amount.
+1. Click Get
+1. Input the number of pokemon you want to generate or click Random for a random amount.
+1. Input the number of items you want to generate or click Random for a random amount.
 1. Some pokemon and areas can only appear if you have a certain amount of points, if you want to use imaginary points, check the box that says Use Points? and input the amount of points you have. Not checking the box will ignore the points requirement for Pokemon and areas.
-1. Areas that house a certain type have a higher chance of appearing if your sleeping Pokemon's type matches that type. If you want to use this feature, check the Use Pokemon's type? box and click Get.
+1. Certain areas have a higher chance of appearing if your sleeping Pokemon's type matches the area's type. If you want to use this feature, check the Use Pokemon's type? box.
 1. Select the [areas](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Dream_World#Areas) where you want to randomize Pokemon from or select none for a random location.
 1. Click Roll to see what results you get.
 1. Observe the results.
