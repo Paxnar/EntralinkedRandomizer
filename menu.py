@@ -83,7 +83,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.itemgen_spinbox = QtWidgets.QSpinBox(self.centralwidget)
-        self.itemgen_spinbox.setMaximum(12)
+        self.itemgen_spinbox.setMaximum(20)
         self.itemgen_spinbox.setObjectName("itemgen_spinbox")
         self.horizontalLayout_3.addWidget(self.itemgen_spinbox)
         self.itemgen_button = QtWidgets.QPushButton(self.centralwidget)

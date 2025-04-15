@@ -70,7 +70,7 @@ class MenuW(QMainWindow, menu.Ui_MainWindow):
         self.pokegen_spinbox.setValue(random.randint(1, 10))
 
     def random_item_amount(self):
-        self.itemgen_spinbox.setValue(random.randint(1, 12))
+        self.itemgen_spinbox.setValue(random.randint(1, 20))
 
     def roll(self):
         self.get_button.setStyleSheet(self.get_button_style)
@@ -134,16 +134,16 @@ class MenuW(QMainWindow, menu.Ui_MainWindow):
         if self.encounters:
             self.output_label.setText(f'{self.output_label.text()[:-2]}\n\n')
 
-        self.items = []
+        items_dict = {}
         for i in range(item_count):
             item = random.choice(possible_items)
             item_id = pokedata.items[item['item']]
-            item_dict = {'id': item_id, 'quantity': 1}
-            if item_dict in self.items:
-                self.items[self.items.index(item_dict)]['quantity'] += 1
+            if item_id not in items_dict:
+                items_dict[item_id] = 1
             else:
-                self.items.append(item_dict)
+                items_dict[item_id] += 1
             self.output_label.setText(f'{self.output_label.text()}{item["item"]}, ')
+        self.items = [{'id': i, 'quantity': items_dict[i]} for i in items_dict]
         if self.items:
             self.output_label.setText(self.output_label.text()[:-2])
 
