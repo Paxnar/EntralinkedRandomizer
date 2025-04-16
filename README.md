@@ -10,7 +10,7 @@
 ### Last compatible Entralinked version [v1.4.1](https://github.com/kuroppoi/entralinked/releases/tag/v1.4.1)
 
 Entralinked Randomizer is a randomizer for kuroppoi's [Entralinked](https://github.com/kuroppoi/entralinked/) standalone Game Sync emulator developed for use with Pokémon Black & White and its sequels.\
-It randomizes Items, Dream World areas, Pokemon, their moves, forms and more.
+It randomizes Items, Dream World areas, Pokemon, their moves and more.
 
 <!-- For users: [Quick Setup Guide](https://github.com/kuroppoi/entralinked/wiki/Setup) -->
 
