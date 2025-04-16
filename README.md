@@ -6,6 +6,9 @@
   <a href="https://github.com/Paxnar/EntralinkedRandomizer/releases/latest"><img src="https://img.shields.io/github/v/release/Paxnar/EntralinkedRandomizer?labelColor=30373D&label=Release&logoColor=959DA5&logo=github&filter=*" alt="release"/></a>
 </p>
 
+### Warning: this app might become obsolete and/or unusable soon due to Entralinked implementing built-in randomizer and legality functions as well as deprecating the browser UI
+### Last compatible Entralinked version [v1.4.1](https://github.com/kuroppoi/entralinked/releases/tag/v1.4.1)
+
 Entralinked Randomizer is a randomizer for kuroppoi's [Entralinked](https://github.com/kuroppoi/entralinked/) standalone Game Sync emulator developed for use with Pokémon Black & White and its sequels.\
 It randomizes Items, Dream World areas, Pokemon, their moves, forms and more.
 
@@ -26,7 +29,7 @@ pyinstaller --onefile --noconsole main.py
 
 ## Usage
 
-1. Run Entralinked.
+1. Run Entralinked. (Ensure you have the compatible version, the last compatible version is stated at the top of README)
 1. Ensure you tucked in a Pokemon.
 1. Run Entralinked Randomizer.
 1. Input your Game Sync ID.
