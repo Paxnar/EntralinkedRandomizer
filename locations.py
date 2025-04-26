@@ -47,6 +47,6 @@ locations = {'Pleasant Forest': PleasantForest, 'Windswept Sky': WindsweptSky, '
 # print(d)
 # for i in locations:
 #     area = locations[i]
-#     pkms = [o['name'] for o in area['pkms']]
-#     print(i, pkms)
+#     pkms = [o['name'] for o in area['pkms'] if o['ver'] == 'none' or o['ver'] == 'B2W2']
+#     print(i, ':', ', '.join(pkms))
 
